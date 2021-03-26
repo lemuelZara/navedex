@@ -4,14 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { User } from '@modules/users/infra/typeorm/entities/user';
-import { Project } from '@modules/projects/infra/typeorm/entities/project';
-import { NaverProject } from '@modules/navers/infra/typeorm/entities/naver-project';
 
 @Entity('navers')
 export class Naver {
@@ -22,14 +19,6 @@ export class Naver {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  projects: Project[];
-
-  @OneToMany(() => NaverProject, (naverProject) => naverProject.naver, {
-    cascade: ['insert', 'update', 'remove'],
-  })
-  @JoinColumn({ name: 'naver_id' })
-  projectsConnection: Promise<NaverProject[]>;
-
   @Column()
   name: string;
 
@@ -38,6 +27,9 @@ export class Naver {
 
   @Column()
   admission_date: Date;
+
+  @Column()
+  job_role: string;
 
   @CreateDateColumn()
   created_at: Date;
