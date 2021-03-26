@@ -8,4 +8,4 @@ const usersController = new UsersController();
 
 usersRouter.post('/', createUserValidator, usersController.create);
 
-export default usersRouter;
+export { usersRouter };
