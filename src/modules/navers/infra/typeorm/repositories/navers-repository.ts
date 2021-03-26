@@ -11,8 +11,14 @@ export class NaversRepository implements INaversRepository {
     this.ormRepository = getRepository(Naver);
   }
 
-  findAllByName(name: string, user_id: string): Promise<Naver[]> {
-    return this.ormRepository.find({
+  public async findById(id: string): Promise<Naver | undefined> {
+    const findNaver = await this.ormRepository.findOne({ where: { id } });
+
+    return findNaver;
+  }
+
+  public async findAllByName(name: string, user_id: string): Promise<Naver[]> {
+    const findNavers = await this.ormRepository.find({
       where: {
         name,
         user: {
@@ -20,13 +26,15 @@ export class NaversRepository implements INaversRepository {
         },
       },
     });
+
+    return findNavers;
   }
 
-  findAllByAdmissionDate(
+  public async findAllByAdmissionDate(
     admission_date: Date,
     user_id: string
   ): Promise<Naver[]> {
-    return this.ormRepository.find({
+    const findNavers = await this.ormRepository.find({
       where: {
         admission_date: new Date(admission_date),
         user: {
@@ -34,10 +42,15 @@ export class NaversRepository implements INaversRepository {
         },
       },
     });
+
+    return findNavers;
   }
 
-  findAllByJobRole(job_role: string, user_id: string): Promise<Naver[]> {
-    return this.ormRepository.find({
+  public async findAllByJobRole(
+    job_role: string,
+    user_id: string
+  ): Promise<Naver[]> {
+    const findNavers = await this.ormRepository.find({
       where: {
         job_role,
         user: {
@@ -45,6 +58,8 @@ export class NaversRepository implements INaversRepository {
         },
       },
     });
+
+    return findNavers;
   }
 
   public async findAllByUserId(user_id: string): Promise<Naver[]> {

@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateNaverService } from '@modules/navers/services/create-naver';
 import { FindNaverService } from '@modules/navers/services/find-naver';
+import { ShowNaverService } from '@modules/navers/services/show-naver';
 
 export class NaversController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -40,5 +41,15 @@ export class NaversController {
     });
 
     return response.status(200).json(navers);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const showNaverService = container.resolve(ShowNaverService);
+
+    const naver = await showNaverService.execute({ id });
+
+    return response.status(200).json(naver);
   }
 }

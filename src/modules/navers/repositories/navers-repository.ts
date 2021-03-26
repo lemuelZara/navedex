@@ -3,6 +3,7 @@ import { ICreateNaverDTO } from '@modules/navers/dtos/create-naver';
 
 export interface INaversRepository {
   create(naverData: ICreateNaverDTO): Promise<Naver>;
+  findById(id: string): Promise<Naver | undefined>;
   findAllByUserId(user_id: string): Promise<Naver[]>;
   findAllByName(name: string, user_id: string): Promise<Naver[]>;
   findAllByAdmissionDate(
