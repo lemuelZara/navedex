@@ -1,5 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
+import { AppError } from '@shared/errors/app-error';
+
 import { User } from '@modules/users/infra/typeorm/entities/user';
 import { IUsersRepository } from '@modules/users/repositories/users-repository';
 
@@ -21,7 +23,7 @@ export class CreateUserService {
     );
 
     if (userEmailAlreadyExists) {
-      throw new Error(
+      throw new AppError(
         "There's already a user registered with that email. Please, try it again with another email."
       );
     }
