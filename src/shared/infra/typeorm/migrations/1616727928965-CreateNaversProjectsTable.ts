@@ -23,16 +23,10 @@ export class CreateNaversProjectsTable1616727928965
           new TableColumn({
             name: 'naver_id',
             type: 'integer',
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
           }),
           new TableColumn({
             name: 'project_id',
             type: 'integer',
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
           }),
           new TableColumn({
             name: 'created_at',
