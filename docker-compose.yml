@@ -3,7 +3,7 @@ version: "3.8"
 services:
   nave_db:
     image: postgres
-    container_name: nave
+    container_name: navedex
     env_file:
       - .env
     environment:
