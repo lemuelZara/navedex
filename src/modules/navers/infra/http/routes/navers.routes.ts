@@ -7,5 +7,6 @@ const naversRouter = Router();
 const naversControllers = new NaversController();
 
 naversRouter.post('/', createNaverValidator, naversControllers.create);
+naversRouter.get('/', naversControllers.index);
 
 export { naversRouter };

@@ -11,6 +11,54 @@ export class NaversRepository implements INaversRepository {
     this.ormRepository = getRepository(Naver);
   }
 
+  findAllByName(name: string, user_id: string): Promise<Naver[]> {
+    return this.ormRepository.find({
+      where: {
+        name,
+        user: {
+          id: user_id,
+        },
+      },
+    });
+  }
+
+  findAllByAdmissionDate(
+    admission_date: Date,
+    user_id: string
+  ): Promise<Naver[]> {
+    return this.ormRepository.find({
+      where: {
+        admission_date: new Date(admission_date),
+        user: {
+          id: user_id,
+        },
+      },
+    });
+  }
+
+  findAllByJobRole(job_role: string, user_id: string): Promise<Naver[]> {
+    return this.ormRepository.find({
+      where: {
+        job_role,
+        user: {
+          id: user_id,
+        },
+      },
+    });
+  }
+
+  public async findAllByUserId(user_id: string): Promise<Naver[]> {
+    const findAllNavers = await this.ormRepository.find({
+      where: {
+        user: {
+          id: user_id,
+        },
+      },
+    });
+
+    return findAllNavers;
+  }
+
   public async create({
     user,
     name,
