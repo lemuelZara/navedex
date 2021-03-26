@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
+import { Project } from '@modules/projects/infra/typeorm/entities/project';
 
 @Entity('users')
 export class User {
@@ -16,6 +17,9 @@ export class User {
 
   @OneToMany(() => Naver, (naver) => naver.user)
   navers: Naver[];
+
+  @OneToMany(() => Project, (project) => project.user)
+  projects: Project[];
 
   @Column()
   email: string;
