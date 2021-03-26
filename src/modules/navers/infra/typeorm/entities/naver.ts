@@ -15,7 +15,9 @@ export class Naver {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.navers)
+  @ManyToOne(() => User, (user) => user.navers, {
+    eager: true,
+  })
   @JoinColumn({ name: 'user_id' })
   user: User;
 

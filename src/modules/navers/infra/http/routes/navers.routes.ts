@@ -9,5 +9,6 @@ const naversControllers = new NaversController();
 naversRouter.post('/', createNaverValidator, naversControllers.create);
 naversRouter.get('/', naversControllers.index);
 naversRouter.get('/:id', naversControllers.show);
+naversRouter.put('/:id', naversControllers.update);
 
 export { naversRouter };

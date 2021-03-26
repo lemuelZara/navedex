@@ -1,5 +1,6 @@
 import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
 import { ICreateNaverDTO } from '@modules/navers/dtos/create-naver';
+import { IUpdateNaverDTO } from '@modules/navers/dtos/update-naver';
 
 export interface INaversRepository {
   create(naverData: ICreateNaverDTO): Promise<Naver>;
@@ -11,4 +12,5 @@ export interface INaversRepository {
     user_id: string
   ): Promise<Naver[]>;
   findAllByJobRole(job_role: string, user_id: string): Promise<Naver[]>;
+  update(naverData: IUpdateNaverDTO): Promise<Naver>;
 }

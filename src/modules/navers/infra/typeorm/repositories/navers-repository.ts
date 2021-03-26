@@ -3,12 +3,19 @@ import { getRepository, Repository } from 'typeorm';
 import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
 import { INaversRepository } from '@modules/navers/repositories/navers-repository';
 import { ICreateNaverDTO } from '@modules/navers/dtos/create-naver';
+import { IUpdateNaverDTO } from '@modules/navers/dtos/update-naver';
 
 export class NaversRepository implements INaversRepository {
   private ormRepository: Repository<Naver>;
 
   constructor() {
     this.ormRepository = getRepository(Naver);
+  }
+
+  public async update(naverData: IUpdateNaverDTO): Promise<Naver> {
+    const naver = await this.ormRepository.save(naverData);
+
+    return naver;
   }
 
   public async findById(id: string): Promise<Naver | undefined> {
