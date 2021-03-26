@@ -4,6 +4,7 @@ import { AppError } from '@shared/errors/app-error';
 
 import { User } from '@modules/users/infra/typeorm/entities/user';
 import { IUsersRepository } from '@modules/users/repositories/users-repository';
+import { IHashProvider } from '@modules/users/providers/HashProvider/models/hash-provider';
 
 interface IRequest {
   email: string;
@@ -14,7 +15,10 @@ interface IRequest {
 export class CreateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({ email, password }: IRequest): Promise<User> {
@@ -28,7 +32,12 @@ export class CreateUserService {
       );
     }
 
-    const createdUser = this.usersRepository.create({ email, password });
+    const hashedPassword = await this.hashProvider.generateHash(password);
+
+    const createdUser = this.usersRepository.create({
+      email,
+      password: hashedPassword,
+    });
 
     return createdUser;
   }
