@@ -5,6 +5,7 @@ import { CreateProjectService } from '@modules/projects/services/create-project'
 import { FindProjectService } from '@modules/projects/services/find-project';
 import { ShowProjectService } from '@modules/projects/services/show-project';
 import { UpdateProjectService } from '@modules/projects/services/update-project';
+import { DeleteProjectService } from '@modules/projects/services/delete-project';
 
 export class ProjectsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -61,5 +62,18 @@ export class ProjectsController {
     });
 
     return response.status(200).json(project);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { user } = request;
+    const { id } = request.params;
+
+    const deleteProjectService = container.resolve(DeleteProjectService);
+
+    await deleteProjectService.execute({ user_id: user.id, id });
+
+    return response.status(200).json({
+      message: 'Project successfully deleted!',
+    });
   }
 }

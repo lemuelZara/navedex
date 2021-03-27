@@ -12,6 +12,10 @@ export class ProjectsRepository implements IProjectsRepository {
     this.ormRepository = getRepository(Project);
   }
 
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
   public async update(projectData: IUpdateProjectDTO): Promise<Project> {
     const project = await this.ormRepository.save(projectData);
 

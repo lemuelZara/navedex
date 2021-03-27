@@ -10,5 +10,6 @@ projectsRouter.post('/', createProjectValidator, projectsController.create);
 projectsRouter.get('/', projectsController.index);
 projectsRouter.get('/:id', projectsController.show);
 projectsRouter.put('/:id', projectsController.update);
+projectsRouter.delete('/:id', projectsController.delete);
 
 export { projectsRouter };

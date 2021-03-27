@@ -9,4 +9,5 @@ export interface IProjectsRepository {
   findAllByUserId(user_id: string): Promise<Project[]>;
   findAll(name: string, user_id: string): Promise<Project[]>;
   update(projectData: IUpdateProjectDTO): Promise<Project>;
+  delete(id: string): Promise<void>;
 }
