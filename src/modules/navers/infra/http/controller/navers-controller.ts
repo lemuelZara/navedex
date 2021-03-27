@@ -5,6 +5,7 @@ import { CreateNaverService } from '@modules/navers/services/create-naver';
 import { FindNaverService } from '@modules/navers/services/find-naver';
 import { ShowNaverService } from '@modules/navers/services/show-naver';
 import { UpdateNaverService } from '@modules/navers/services/update-naver';
+import { DeleteNaverService } from '@modules/navers/services/delete-naver';
 
 export class NaversController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -71,5 +72,18 @@ export class NaversController {
     });
 
     return response.status(200).json(naver);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { user } = request;
+    const { id } = request.params;
+
+    const deleteNaverService = container.resolve(DeleteNaverService);
+
+    await deleteNaverService.execute({ user_id: user.id, id });
+
+    return response.status(200).json({
+      message: 'Naver successfully deleted!',
+    });
   }
 }

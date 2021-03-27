@@ -12,6 +12,10 @@ export class NaversRepository implements INaversRepository {
     this.ormRepository = getRepository(Naver);
   }
 
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
   public async update(naverData: IUpdateNaverDTO): Promise<Naver> {
     const naver = await this.ormRepository.save(naverData);
 

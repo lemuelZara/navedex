@@ -13,4 +13,5 @@ export interface INaversRepository {
   ): Promise<Naver[]>;
   findAllByJobRole(job_role: string, user_id: string): Promise<Naver[]>;
   update(naverData: IUpdateNaverDTO): Promise<Naver>;
+  delete(id: string): Promise<void>;
 }
