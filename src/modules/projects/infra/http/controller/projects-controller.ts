@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateProjectService } from '@modules/projects/services/create-project';
 import { FindProjectService } from '@modules/projects/services/find-project';
+import { ShowProjectService } from '@modules/projects/services/show-project';
 
 export class ProjectsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -33,5 +34,15 @@ export class ProjectsController {
     });
 
     return response.status(200).json(projects);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const showProjectService = container.resolve(ShowProjectService);
+
+    const project = await showProjectService.execute({ id });
+
+    return response.status(200).json(project);
   }
 }
