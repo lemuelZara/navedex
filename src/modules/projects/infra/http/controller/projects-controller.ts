@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { CreateProjectService } from '@modules/projects/services/create-project';
 import { FindProjectService } from '@modules/projects/services/find-project';
 import { ShowProjectService } from '@modules/projects/services/show-project';
+import { UpdateProjectService } from '@modules/projects/services/update-project';
 
 export class ProjectsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -42,6 +43,22 @@ export class ProjectsController {
     const showProjectService = container.resolve(ShowProjectService);
 
     const project = await showProjectService.execute({ id });
+
+    return response.status(200).json(project);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { user } = request;
+    const { id } = request.params;
+    const { name } = request.body;
+
+    const updateProjectService = container.resolve(UpdateProjectService);
+
+    const project = await updateProjectService.execute({
+      user_id: user.id,
+      id,
+      name,
+    });
 
     return response.status(200).json(project);
   }

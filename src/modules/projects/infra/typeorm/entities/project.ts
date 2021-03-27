@@ -15,7 +15,9 @@ export class Project {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.projects)
+  @ManyToOne(() => User, (user) => user.projects, {
+    eager: true,
+  })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
