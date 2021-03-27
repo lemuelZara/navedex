@@ -7,5 +7,6 @@ const projectsRouter = Router();
 const projectsController = new ProjectsController();
 
 projectsRouter.post('/', createProjectValidator, projectsController.create);
+projectsRouter.get('/', projectsController.index);
 
 export { projectsRouter };

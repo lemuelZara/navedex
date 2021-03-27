@@ -11,6 +11,29 @@ export class ProjectsRepository implements IProjectsRepository {
     this.ormRepository = getRepository(Project);
   }
 
+  public async findAllByUserId(user_id: string): Promise<Project[]> {
+    const projects = await this.ormRepository.find({
+      where: {
+        user: {
+          id: user_id,
+        },
+      },
+    });
+
+    return projects;
+  }
+
+  public async findAll(name: string, user_id: string): Promise<Project[]> {
+    const projects = await this.ormRepository.find({
+      where: {
+        name,
+        user: { id: user_id },
+      },
+    });
+
+    return projects;
+  }
+
   public async findByName(name: string): Promise<Project | undefined> {
     const findProject = await this.ormRepository.findOne({ where: { name } });
 
