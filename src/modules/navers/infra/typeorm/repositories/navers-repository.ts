@@ -23,7 +23,10 @@ export class NaversRepository implements INaversRepository {
   }
 
   public async findById(id: string): Promise<Naver | undefined> {
-    const findNaver = await this.ormRepository.findOne({ where: { id } });
+    const findNaver = await this.ormRepository.findOne({
+      where: { id },
+      relations: ['projects'],
+    });
 
     return findNaver;
   }
@@ -36,6 +39,7 @@ export class NaversRepository implements INaversRepository {
           id: user_id,
         },
       },
+      relations: ['projects'],
     });
 
     return findNavers;
@@ -52,6 +56,7 @@ export class NaversRepository implements INaversRepository {
           id: user_id,
         },
       },
+      relations: ['projects'],
     });
 
     return findNavers;
@@ -68,6 +73,7 @@ export class NaversRepository implements INaversRepository {
           id: user_id,
         },
       },
+      relations: ['projects'],
     });
 
     return findNavers;
@@ -80,6 +86,7 @@ export class NaversRepository implements INaversRepository {
           id: user_id,
         },
       },
+      relations: ['projects'],
     });
 
     return findAllNavers;
