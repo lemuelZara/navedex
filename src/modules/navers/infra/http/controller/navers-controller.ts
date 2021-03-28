@@ -64,18 +64,25 @@ export class NaversController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { user } = request;
-    const { id } = request.params;
-    const { name, birthdate, admission_date, job_role } = request.body;
+    const { id: naver_id } = request.params;
+    const {
+      name,
+      birthdate,
+      admission_date,
+      job_role,
+      projects,
+    } = request.body;
 
     const updateNaverService = container.resolve(UpdateNaverService);
 
     const naver = await updateNaverService.execute({
       user_id: user.id,
-      id,
+      naver_id,
       name,
       birthdate,
       admission_date,
       job_role,
+      projects,
     });
 
     return response.status(200).json(naver);
