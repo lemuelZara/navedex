@@ -10,13 +10,14 @@ import { DeleteProjectService } from '@modules/projects/services/delete-project'
 export class ProjectsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { user } = request;
-    const { name } = request.body;
+    const { name, navers } = request.body;
 
     const createProjectService = container.resolve(CreateProjectService);
 
     const project = await createProjectService.execute({
       user_id: user.id,
       name,
+      navers,
     });
 
     return response.status(201).json(project);

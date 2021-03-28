@@ -1,15 +1,37 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 
 import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
 import { INaversRepository } from '@modules/navers/repositories/navers-repository';
 import { ICreateNaverDTO } from '@modules/navers/dtos/create-naver';
 import { IUpdateNaverDTO } from '@modules/navers/dtos/update-naver';
 
+interface IFindNavers {
+  id: string;
+}
+
 export class NaversRepository implements INaversRepository {
   private ormRepository: Repository<Naver>;
 
   constructor() {
     this.ormRepository = getRepository(Naver);
+  }
+
+  public async findAllById(navers: IFindNavers[]): Promise<Naver[]> {
+    const naversIds = navers.map((naver) => naver.id);
+
+    const naversFound = await this.ormRepository.find({
+      where: {
+        id: In([...naversIds]),
+      },
+    });
+
+    return naversFound;
+  }
+
+  public async findOneOrFail(id: string): Promise<Naver | undefined> {
+    const naver = await this.ormRepository.findOneOrFail(id);
+
+    return naver;
   }
 
   public async delete(id: string): Promise<void> {

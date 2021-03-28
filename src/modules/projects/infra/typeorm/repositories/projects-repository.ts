@@ -45,7 +45,10 @@ export class ProjectsRepository implements IProjectsRepository {
   }
 
   public async findById(id: string): Promise<Project | undefined> {
-    return this.ormRepository.findOne({ where: { id } });
+    return this.ormRepository.findOne({
+      where: { id },
+      relations: ['navers'],
+    });
   }
 
   public async findAllByUserId(user_id: string): Promise<Project[]> {
@@ -55,6 +58,7 @@ export class ProjectsRepository implements IProjectsRepository {
           id: user_id,
         },
       },
+      relations: ['navers'],
     });
 
     return projects;
@@ -64,21 +68,31 @@ export class ProjectsRepository implements IProjectsRepository {
     const projects = await this.ormRepository.find({
       where: {
         name,
-        user: { id: user_id },
+        user: {
+          id: user_id,
+        },
       },
+      relations: ['navers'],
     });
 
     return projects;
   }
 
   public async findByName(name: string): Promise<Project | undefined> {
-    const findProject = await this.ormRepository.findOne({ where: { name } });
+    const findProject = await this.ormRepository.findOne({
+      where: { name },
+      relations: ['navers'],
+    });
 
     return findProject;
   }
 
-  public async create({ user, name }: ICreateProjectDTO): Promise<Project> {
-    const createdProject = this.ormRepository.create({ user, name });
+  public async create({
+    user,
+    name,
+    navers,
+  }: ICreateProjectDTO): Promise<Project> {
+    const createdProject = this.ormRepository.create({ user, name, navers });
 
     await this.ormRepository.save(createdProject);
 
