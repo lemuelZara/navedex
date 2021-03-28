@@ -5,6 +5,7 @@ import { AppError } from '@shared/errors/app-error';
 import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
 import { INaversRepository } from '@modules/navers/repositories/navers-repository';
 
+import { Project } from '@modules/projects/infra/typeorm/entities/project';
 import { IProjectsRepository } from '@modules/projects/repositories/projects-repository';
 
 interface IProject {
@@ -40,6 +41,8 @@ export class UpdateNaverService {
     user_id,
     projects,
   }: IRequest): Promise<Naver> {
+    let findProjects: Project[] = [];
+
     const naver = await this.naversRepository.findById(naver_id);
 
     if (!naver) {
@@ -51,16 +54,20 @@ export class UpdateNaverService {
     }
 
     try {
-      const findProjects = projects.map((project) =>
+      const verifyProjects = projects.map((project) =>
         this.projectsRepository.findOneOrFail(project.id)
       );
 
-      await Promise.all(findProjects);
+      await Promise.all(verifyProjects);
     } catch (error) {
       throw new AppError('Project not found!');
     }
 
-    const findProjects = await this.projectsRepository.findAllById(projects);
+    if (projects) {
+      findProjects = [];
+    } else {
+      findProjects = await this.projectsRepository.findAllById(projects);
+    }
 
     Object.assign(naver, {
       name,

@@ -7,6 +7,7 @@ import { INaversRepository } from '@modules/navers/repositories/navers-repositor
 
 import { IUsersRepository } from '@modules/users/repositories/users-repository';
 
+import { Project } from '@modules/projects/infra/typeorm/entities/project';
 import { IProjectsRepository } from '@modules/projects/repositories/projects-repository';
 
 interface IProject {
@@ -43,21 +44,27 @@ export class CreateNaverService {
     job_role,
     projects,
   }: IRequest): Promise<Naver> {
+    let findProjects: Project[] = [];
+
     const findUser = await this.usersRepository.findById(user_id);
 
     if (!findUser) throw new AppError('User not found!');
 
     try {
-      const findProjects = projects.map((project) =>
+      const verifyProjects = projects.map((project) =>
         this.projectsRepository.findOneOrFail(project.id)
       );
 
-      await Promise.all(findProjects);
+      await Promise.all(verifyProjects);
     } catch (error) {
       throw new AppError('Project not found!');
     }
 
-    const findProjects = await this.projectsRepository.findAllById(projects);
+    if (projects) {
+      findProjects = [];
+    } else {
+      findProjects = await this.projectsRepository.findAllById(projects);
+    }
 
     const createdNaver = await this.naversRepository.create({
       user: findUser,
