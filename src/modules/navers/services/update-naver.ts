@@ -63,7 +63,7 @@ export class UpdateNaverService {
       throw new AppError('Project not found!');
     }
 
-    if (projects) {
+    if (projects.length === 0) {
       findProjects = [];
     } else {
       findProjects = await this.projectsRepository.findAllById(projects);
