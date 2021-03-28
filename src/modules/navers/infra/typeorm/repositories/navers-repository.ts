@@ -91,13 +91,15 @@ export class NaversRepository implements INaversRepository {
     birthdate,
     admission_date,
     job_role,
+    projects,
   }: ICreateNaverDTO): Promise<Naver> {
     const createdNaver = this.ormRepository.create({
-      user,
       name,
       birthdate,
       admission_date,
       job_role,
+      user,
+      projects,
     });
 
     await this.ormRepository.save(createdNaver);

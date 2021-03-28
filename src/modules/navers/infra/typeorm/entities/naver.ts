@@ -3,12 +3,15 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { User } from '@modules/users/infra/typeorm/entities/user';
+
+import { Project } from '@modules/projects/infra/typeorm/entities/project';
 
 @Entity('navers')
 export class Naver {
@@ -20,6 +23,9 @@ export class Naver {
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @ManyToMany(() => Project, (project) => project.navers)
+  projects: Project[];
 
   @Column()
   name: string;

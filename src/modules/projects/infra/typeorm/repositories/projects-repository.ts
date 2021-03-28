@@ -1,15 +1,37 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 
 import { Project } from '@modules/projects/infra/typeorm/entities/project';
 import { IProjectsRepository } from '@modules/projects/repositories/projects-repository';
 import { ICreateProjectDTO } from '@modules/projects/dtos/create-project';
 import { IUpdateProjectDTO } from '@modules/projects/dtos/update-project';
 
+interface IFindProjects {
+  id: string;
+}
+
 export class ProjectsRepository implements IProjectsRepository {
   private ormRepository: Repository<Project>;
 
   constructor() {
     this.ormRepository = getRepository(Project);
+  }
+
+  public async findAllById(projects: IFindProjects[]): Promise<Project[]> {
+    const projectsIds = projects.map((project) => project.id);
+
+    const projectsFound = await this.ormRepository.find({
+      where: {
+        id: In([...projectsIds]),
+      },
+    });
+
+    return projectsFound;
+  }
+
+  public async findOneOrFail(id: string): Promise<Project | undefined> {
+    const project = await this.ormRepository.findOneOrFail(id);
+
+    return project;
   }
 
   public async delete(id: string): Promise<void> {

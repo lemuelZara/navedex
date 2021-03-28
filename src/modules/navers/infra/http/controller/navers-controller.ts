@@ -10,16 +10,23 @@ import { DeleteNaverService } from '@modules/navers/services/delete-naver';
 export class NaversController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { user } = request;
-    const { name, birthdate, admission_date, job_role } = request.body;
-
-    const createNaverService = container.resolve(CreateNaverService);
-
-    const naver = await createNaverService.execute({
+    const {
       name,
       birthdate,
       admission_date,
       job_role,
+      projects,
+    } = request.body;
+
+    const createNaverService = container.resolve(CreateNaverService);
+
+    const naver = await createNaverService.execute({
       user_id: user.id,
+      name,
+      birthdate,
+      admission_date,
+      job_role,
+      projects,
     });
 
     return response.status(201).json(naver);

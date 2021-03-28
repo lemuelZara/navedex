@@ -1,14 +1,18 @@
-import { User } from '@modules/users/infra/typeorm/entities/user';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { User } from '@modules/users/infra/typeorm/entities/user';
+
+import { Naver } from '@modules/navers/infra/typeorm/entities/naver';
 
 @Entity('projects')
 export class Project {
@@ -20,6 +24,22 @@ export class Project {
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @ManyToMany(() => Naver, (naver) => naver.projects, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'navers_projects',
+    joinColumn: {
+      name: 'project_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'naver_id',
+      referencedColumnName: 'id',
+    },
+  })
+  navers: Naver[];
 
   @Column()
   name: string;
