@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./.github/nave-logo.png" />
+  <img src="./.github/nave-logo.png" width="200" />
 </h1>
 
 <p align="center">
@@ -13,7 +13,21 @@
 
 <br>
 
-## Estruturação do Banco de Dados
+<p align="center">
+  <a href="#books-sobre-o-projeto">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#bank-estruturação-do-banco-de-dados">Banco de Dados</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#construction_worker-instalação">Instalação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#runner-como-executar-o-projeto">Como executar o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#crossed_swords-dificuldades">Dificuldades</a>&nbsp;&nbsp;&nbsp;
+</p>
+
+## :books: Sobre o projeto
+
+Implementação de uma API utilizando Node.js no padrão RESTful que possibilite as funcionalidades de um CRUD para Navers e Projetos.
+
+<br>
+
+## :bank: Estruturação do Banco de Dados
 
 Abaixo segue a imagem de como fiz a estruturação do banco de dados referente a aplicação:
 
@@ -21,7 +35,60 @@ Abaixo segue a imagem de como fiz a estruturação do banco de dados referente a
 
 <br>
 
-## Dificuldades
+## :construction_worker: Instalação
+
+> 💡 Antes de baixar o projeto, é necessário ter instalado o Node.js e o Yarn (ou NPM) primeiro
+
+**Clone o repositório via HTTPS, com esse comando:**
+
+```shell
+git clone https://github.com/lemuelZara/navedex.git
+```
+
+**Entre dentro do projeto e baixe as dependências do projeto:**
+```shell
+# Entrando dentro do repositório
+cd navedex
+
+# Se usar Yarn
+yarn
+
+# Se usar NPM
+npm install
+```
+
+Crie suas de variáveis de ambiente baseado no arquivo .env.example:
+```shell
+cp .env.example .env
+```
+
+*Depois de ter copiado o exemplo, certifique-se de preencher as variáveis com novos valores.*
+
+<br>
+
+## :runner: Como executar o projeto
+
+> 💡 **Atenção!** O Docker está sendo utilizado para prover um container do PostgreSQL para servir como banco de dados.
+
+Para preparar o banco de dados e executar a aplicação, defina suas variáveis de ambiente e execute docker-compose:
+```shell
+sudo docker-compose up -d
+```
+
+Execute o comando para criar as `migrations` e configurar o esquema do banco de dados:
+```shell
+yarn typeorm migration:run
+```
+
+Execute o seguinte comando para iniciar o aplicativo em um ambiente de desenvolvimento:
+```shell
+yarn dev
+```
+
+<br>
+
+## :crossed_swords: Dificuldades
+
   - Entender inicialmente como ficaria a estruturação das tabelas do banco. Depois de um tempo pensando um pouco e raciocinando melhor, ficou mais claro como devia ficar.
 
   - Criar a relação entre Naver's e Project's, bem como como realizar o cadastro de um Naver com nenhum ou + Projects, e vice-versa. Pesquisando a respeito, a melhor escolha para mim seria utilizar a anotação `@ManyToMany` do TypeORM, onde o trabalho de cadastro dessas entidades ficou mais fácil.
