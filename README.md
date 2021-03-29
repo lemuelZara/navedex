@@ -7,7 +7,6 @@ Desafio para a vaga de Backend Júnior da empresa Nave.rs.
 <img src="./.github/nave-challenge-database.png">
 
 <br>
-<br>
 
 ## Dificuldades
   - Entender inicialmente como ficaria a estruturação das tabelas do banco. Depois de um tempo pensando um pouco e raciocinando melhor, ficou mais claro como devia ficar.
