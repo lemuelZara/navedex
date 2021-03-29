@@ -1,57 +1,29 @@
-# Navedex API | Nave.rs
+# Navedex API
 
-## Requisitos
+Desafio para a vaga de Backend Júnior da empresa Nave.rs.
 
-- [x] Deve ser possível cadastrar um usuário
-- [x] Deve ser possível realizar o login com um usuário
+## Estruturação do Banco de Dados
 
-## Etapas
-
-- [x] Criar a classe de Naver e fazer o relacionamento 1:N com o User (feito)
-- [x] Cadastrar um Naver sem o campo projects (feito)
-- [x] Criar a classe de Product (não feito)
-- [] Cadastrar um Product (não feito)
-- [] Criar a classe de NaverProduct e fazer o relacionamento N:M com a classe de Naver e com a classe de Product (não feito)
-- [] Por fim, cadastrar novamente um Naver com o campo "projects: []"
-
-## Estruturação das tabelas do banco de dados
-
-Aqui fica a imagem do DER
+<img src="./.github/nave-challenge-database.png">
 
 <br>
-
-## Como utilizar o projeto
-
-Rodar as `migrations` do banco de dados:
-
-`yarn typeorm migration:run`
-
 <br>
 
-## Ferramentas e Tecnologias utilizadas
+## Dificuldades
+  - Entender inicialmente como ficaria a estruturação das tabelas do banco. Depois de um tempo pensando um pouco e raciocinando melhor, ficou mais claro como devia ficar.
 
- - Express
- - Docker, Docker Compose
- - TypeORM
+  <br>
 
-<br>
+  - Criar a relação entre Naver's e Project's, bem como como realizar o cadastro de um Naver com nenhum ou + Projects, e vice-versa. Pesquisando a respeito, a melhor escolha para mim seria utilizar a anotação `@ManyToMany` do TypeORM, onde o trabalho de cadastro dessas entidades ficou mais fácil.
 
-## Comandos úteis
+  <br>
 
-Ver os dados do banco de dados:
+  - Criar a lógica por trás da filtragem (por `name`, `birthdate` e `admission_date`) de Naver's. No final, para resolver isso, criei métodos para buscar os Naver's cada qual com sua propriedade específica:
+    - `findAllByName`
+    - `findAllByAdmissionDate`
+    - `findAllByJobRole`
 
-```shell
-## Entra dentro do container do postgres
-sudo docker exec -it nave /bin/bash
+    Dessa forma, a manipulação e verificação desses dados se tornou mais fácil.
 
-## Depois de entrar no container, use o PSQL para realizar a conexão com o banco de dados
-psql nave postgres
 
-## Feito isso, só usar os comandos do PSQL para ver as mudanças feitas
-\d
-\dt
-select * from users;
-select * from navers;
-select * from projects;
-...
-```
+
