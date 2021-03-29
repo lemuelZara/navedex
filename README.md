@@ -3,10 +3,10 @@
 </h1>
 
 <p align="center">
-  <img alt="Node.js Logo" src="https://img.shields.io/badge/Node.js-LTS-6600ca?logo=node.js&labelColor=fff">&nbsp;&nbsp;
-  <img alt="Express Logo" src="https://img.shields.io/badge/Express-v4.17.1-6600ca?logo=express&labelColor=fff&logoColor=000">&nbsp;&nbsp;
-  <img alt="TypeORM Logo" src="https://img.shields.io/badge/TypeORM-v0.2.54-6600ca?logo=typeorm&labelColor=fff&logoColor=000">&nbsp;&nbsp;
-  <img alt="TypeORM Logo" src="https://img.shields.io/badge/Docker-v20.10.5-6600ca?logo=docker&labelColor=fff">&nbsp;&nbsp;
+  <img alt="Node.js Logo" src="https://img.shields.io/badge/Node.js-LTS-6404CB?logo=node.js&labelColor=fff">&nbsp;&nbsp;
+  <img alt="Express Logo" src="https://img.shields.io/badge/Express-v4.17.1-6404CB?logo=express&labelColor=fff&logoColor=000">&nbsp;&nbsp;
+  <img alt="TypeORM Logo" src="https://img.shields.io/badge/TypeORM-v0.2.54-6404CB?logo=typeorm&labelColor=fff&logoColor=000">&nbsp;&nbsp;
+  <img alt="TypeORM Logo" src="https://img.shields.io/badge/Docker-v20.10.5-6404CB?logo=docker&labelColor=fff">&nbsp;&nbsp;
 </p>
 
 <h1 align="center">Navedex API</h1>
