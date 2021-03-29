@@ -52,7 +52,7 @@ export class ProjectsController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { user } = request;
     const { id } = request.params;
-    const { name } = request.body;
+    const { name, navers } = request.body;
 
     const updateProjectService = container.resolve(UpdateProjectService);
 
@@ -60,6 +60,7 @@ export class ProjectsController {
       user_id: user.id,
       id,
       name,
+      navers,
     });
 
     return response.status(200).json(project);
