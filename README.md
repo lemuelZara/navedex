@@ -4,8 +4,9 @@
 
 <p align="center">
   <img alt="Node.js Logo" src="https://img.shields.io/badge/Node.js-LTS-6600ca?logo=node.js&labelColor=fff">&nbsp;&nbsp;
-  <img alt="Express Logo" src="https://img.shields.io/badge/Express-4.17.1-6600ca?logo=express&labelColor=fff&logoColor=000">&nbsp;&nbsp;
-  <img alt="TypeORM Logo" src="https://img.shields.io/badge/TypeORM-0.2.54-6600ca?logo=typeorm&labelColor=fff&logoColor=000">&nbsp;&nbsp;
+  <img alt="Express Logo" src="https://img.shields.io/badge/Express-v4.17.1-6600ca?logo=express&labelColor=fff&logoColor=000">&nbsp;&nbsp;
+  <img alt="TypeORM Logo" src="https://img.shields.io/badge/TypeORM-v0.2.54-6600ca?logo=typeorm&labelColor=fff&logoColor=000">&nbsp;&nbsp;
+  <img alt="TypeORM Logo" src="https://img.shields.io/badge/Docker-v20.10.5-6600ca?logo=docker&labelColor=fff">&nbsp;&nbsp;
 </p>
 
 <h1 align="center">Navedex API</h1>
@@ -66,8 +67,6 @@ Crie suas de variáveis de ambiente baseado no arquivo .env.example:
 ```shell
 cp .env.example .env
 ```
-
-*Depois de ter copiado o exemplo, certifique-se de preencher as variáveis com novos valores.*
 
 <br>
 
