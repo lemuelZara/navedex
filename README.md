@@ -11,6 +11,11 @@
 <h1 align="center">Navedex API</h1>
 <p align="center">Desafio proposto pela empresa Nave.rs para a vaga de Backend Júnior</p>
 
+<p align="center">
+  <a href="https://insomnia.rest/run/?label=Navedex%20API&uri=https%3A%2F%2Fgithub.com%2FlemuelZara%2Fnavedex%2Fblob%2Fmain%2F.github%2Finsomnia.json">
+  <img src="https://insomnia.rest/images/run.svg" />
+</p>
+
 <br>
 
 <p align="center">
