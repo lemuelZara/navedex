@@ -27,6 +27,8 @@
   <a href="#crossed_swords-dificuldades">Dificuldades</a>&nbsp;&nbsp;&nbsp;
 </p>
 
+<br>
+
 ## :books: Sobre o projeto
 
 Implementação de uma API utilizando Node.js no padrão RESTful que possibilite as funcionalidades de um CRUD para Navers e Projetos.
