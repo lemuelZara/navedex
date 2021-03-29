@@ -7,6 +7,8 @@ import { ShowNaverService } from '@modules/navers/services/show-naver';
 import { UpdateNaverService } from '@modules/navers/services/update-naver';
 import { DeleteNaverService } from '@modules/navers/services/delete-naver';
 
+import naverView from '@modules/navers/views/navers-view';
+
 export class NaversController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { user } = request;
@@ -29,7 +31,7 @@ export class NaversController {
       projects,
     });
 
-    return response.status(201).json(naver);
+    return response.status(201).json(naverView.showNaver(naver));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -49,7 +51,7 @@ export class NaversController {
       job_role,
     });
 
-    return response.status(200).json(navers);
+    return response.status(200).json(naverView.listNavers(navers));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -59,7 +61,7 @@ export class NaversController {
 
     const naver = await showNaverService.execute({ id });
 
-    return response.status(200).json(naver);
+    return response.status(200).json(naverView.showNaver(naver));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -85,7 +87,7 @@ export class NaversController {
       projects,
     });
 
-    return response.status(200).json(naver);
+    return response.status(200).json(naverView.showNaver(naver));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
