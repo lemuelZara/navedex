@@ -13,7 +13,7 @@
 <p align="center">Desafio proposto pela empresa Nave.rs para a vaga de Backend Júnior</p>
 
 <p align="center">
-  <a href="https://insomnia.rest/run/?label=Navedex%20API&uri=https%3A%2F%2Fgithub.com%2FlemuelZara%2Fnavedex%2Fblob%2Fmain%2F.github%2Finsomnia.json">
+  <a href="https://gist.githubusercontent.com/lemuelZara/1fe9c5449adc8571bea4dc595b165562/raw/c29dd47a408ee64e4627320d689f9fdca4ec5ce1/navedex-insomnia">
   <img src="https://insomnia.rest/images/run.svg" />
 </p>
 
